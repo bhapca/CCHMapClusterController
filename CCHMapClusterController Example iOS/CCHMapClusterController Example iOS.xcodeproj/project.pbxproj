@@ -56,6 +56,7 @@
 		62D667D21845F8A40046D5D5 /* CCHMapClusterControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D667CB1845F8A40046D5D5 /* CCHMapClusterControllerUtils.m */; };
 		62D667D41845F8A40046D5D5 /* CCHMapViewDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D667CD1845F8A40046D5D5 /* CCHMapViewDelegateProxy.m */; };
 		62D71E11187EB45500E52EE3 /* ClusterAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D71E10187EB45500E52EE3 /* ClusterAnnotationView.m */; };
+		8281D57E1C96E83600F74F90 /* PointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8281D57D1C96E83600F74F90 /* PointAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,8 @@
 		62D667CD1845F8A40046D5D5 /* CCHMapViewDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapViewDelegateProxy.m; sourceTree = "<group>"; };
 		62D71E0F187EB45500E52EE3 /* ClusterAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterAnnotationView.h; sourceTree = "<group>"; };
 		62D71E10187EB45500E52EE3 /* ClusterAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterAnnotationView.m; sourceTree = "<group>"; };
+		8281D57C1C96E83600F74F90 /* PointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PointAnnotation.h; path = ../../CCHMapClusterController/PointAnnotation.h; sourceTree = "<group>"; };
+		8281D57D1C96E83600F74F90 /* PointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PointAnnotation.m; path = ../../CCHMapClusterController/PointAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +270,8 @@
 				62D667BC1845F76F0046D5D5 /* DataReader.h */,
 				62D667BD1845F76F0046D5D5 /* DataReader.m */,
 				62D667BE1845F76F0046D5D5 /* DataReaderDelegate.h */,
+				8281D57C1C96E83600F74F90 /* PointAnnotation.h */,
+				8281D57D1C96E83600F74F90 /* PointAnnotation.m */,
 				62D6679A1845E0F20046D5D5 /* Images.xcassets */,
 				6284D0181C288C3F00EFCA2E /* Launch Screen.storyboard */,
 				62D667891845E0F20046D5D5 /* Supporting Files */,
@@ -462,6 +467,7 @@
 				62C49A7818E75033000BC5CD /* CCHMapClusterOperation.m in Sources */,
 				62D667D21845F8A40046D5D5 /* CCHMapClusterControllerUtils.m in Sources */,
 				4869F186184FD5F100251ADC /* CCHCenterOfMassMapClusterer.m in Sources */,
+				8281D57E1C96E83600F74F90 /* PointAnnotation.m in Sources */,
 				4889995D185D1C1300F3D6ED /* CCHMapTree.m in Sources */,
 				62D667D01845F8A40046D5D5 /* CCHMapClusterController.m in Sources */,
 				62D6678F1845E0F20046D5D5 /* main.m in Sources */,

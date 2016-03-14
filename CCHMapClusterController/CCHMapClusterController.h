@@ -97,4 +97,6 @@
  */
 - (void)selectAnnotation:(id<MKAnnotation>)annotation andZoomToRegionWithLatitudinalMeters:(CLLocationDistance)latitudinalMeters longitudinalMeters:(CLLocationDistance)longitudinalMeters;
 
+- (void)updateAnnotationsWithCompletionHandler:(void (^)())completionHandler;
+
 @end

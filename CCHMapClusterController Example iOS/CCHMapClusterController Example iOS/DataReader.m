@@ -11,6 +11,7 @@
 #import "DataReaderDelegate.h"
 
 #import <MapKit/MapKit.h>
+#import "PointAnnotation.h"
 
 #define BATCH_COUNT 500
 #define DELAY_BETWEEN_BATCHES 0.3
@@ -46,7 +47,7 @@
         NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:BATCH_COUNT];
         for (NSDictionary *annotationAsJSON in dataAsJson) {
             // Convert JSON into annotation object
-            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+            PointAnnotation *annotation = [[PointAnnotation alloc] init];
             NSString *latitudeAsString = [annotationAsJSON valueForKeyPath:@"location.coordinates.latitude"];
             NSString *longitudeAsString = [annotationAsJSON valueForKeyPath:@"location.coordinates.longitude"];
             annotation.coordinate = CLLocationCoordinate2DMake(latitudeAsString.doubleValue, longitudeAsString.doubleValue);
@@ -78,7 +79,7 @@
             NSString *trimmedLine = [line stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
             if (trimmedLine.length > 0) {
                 // Convert CSV into annotation object
-                MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+                PointAnnotation *annotation = [[PointAnnotation alloc] init];
                 NSArray *components = [line componentsSeparatedByString:@","];
                 annotation.coordinate = CLLocationCoordinate2DMake([components[1] doubleValue], [components[0] doubleValue]);
                 annotation.title = [components[2] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];

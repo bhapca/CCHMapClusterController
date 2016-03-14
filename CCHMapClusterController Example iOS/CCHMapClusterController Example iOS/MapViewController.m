@@ -130,6 +130,9 @@
     for (id<MKOverlay> overlay in self.mapView.overlays) {
         [self.mapView removeOverlay:overlay];
     }
+    
+    [self.mapClusterControllerRed updateAnnotationsWithCompletionHandler:nil];
+    [self.mapClusterControllerBlue updateAnnotationsWithCompletionHandler:nil];
 }
 
 - (void)dataReader:(DataReader *)dataReader addAnnotations:(NSArray *)annotations
