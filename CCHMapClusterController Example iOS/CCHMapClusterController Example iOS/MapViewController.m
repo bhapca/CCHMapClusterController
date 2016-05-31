@@ -52,11 +52,29 @@
     self.mapClusterControllerRed.delegate = self;
     
     // Read annotations
-    self.dataReader = [[DataReader alloc] init];
-    self.dataReader.delegate = self;
-
+    //self.dataReader = [[DataReader alloc] init];
+    //self.dataReader.delegate = self;
+    
     // Settings
     [self resetSettings];
+    
+    // Overriding the settings, to prevent clustering
+    self.mapClusterControllerRed.maxZoomLevelForClustering = -1;
+    self.mapClusterControllerRed.minUniqueLocationsForClustering = NSUIntegerMax;
+    
+    
+    // Using 2 annotations at the same coordinate
+    MKPointAnnotation *annotation1 = [[MKPointAnnotation alloc] init];
+    annotation1.coordinate = CLLocationCoordinate2DMake(52.521350640006, 13.335758149997);
+    annotation1.title = @"One";
+
+    MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc] init];
+    annotation2.coordinate = CLLocationCoordinate2DMake(52.521350640006, 13.335758149997);
+    annotation2.title = @"Two";
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.mapClusterControllerRed addAnnotations:@[annotation1, annotation2] withCompletionHandler:nil];
+    });
 }
 
 - (IBAction)resetSettings
