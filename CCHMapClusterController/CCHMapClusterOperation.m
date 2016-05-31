@@ -115,8 +115,14 @@
             BOOL annotationSetsAreUniqueLocations;
             NSArray *annotationSets;
             if (disableClustering) {
+                NSMutableArray *uniqueAnnotationsSets = [NSMutableArray new];
                 // Create annotation for each unique location because clustering is disabled
-                annotationSets = CCHMapClusterControllerAnnotationSetsByUniqueLocations(allAnnotationsInCell, NSUIntegerMax);
+                for (id<MKAnnotation> annotation in allAnnotationsInCell) {
+                    NSSet *annotationsSet = [[NSSet alloc] initWithObjects:annotation, nil];
+                    [uniqueAnnotationsSets addObject:annotationsSet];
+                }
+                annotationSets = [uniqueAnnotationsSets copy];
+                //annotationSets = CCHMapClusterControllerAnnotationSetsByUniqueLocations(allAnnotationsInCell, NSUIntegerMax);
                 annotationSetsAreUniqueLocations = YES;
             } else {
                 NSUInteger max = _minUniqueLocationsForClustering > 1 ? _minUniqueLocationsForClustering - 1 : 1;
