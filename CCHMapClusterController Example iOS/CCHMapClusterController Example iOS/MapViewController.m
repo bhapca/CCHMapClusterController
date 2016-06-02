@@ -61,9 +61,14 @@
 
 - (IBAction)resetSettings
 {
-    self.count = 0;
-    Settings *settings = [[Settings alloc] init];
-    [self updateWithSettings:settings];
+    if (self.settings == nil) {
+        self.count = 0;
+        Settings *settings = [[Settings alloc] init];
+        [self updateWithSettings:settings];
+    } else {
+        CLLocationCoordinate2D location = CLLocationCoordinate2DMake(52.516221, 13.377829);
+        [self.mapView setCenterCoordinate:location animated:YES];
+    }
 }
 
 - (void)updateWithSettings:(Settings *)settings
