@@ -67,7 +67,14 @@
         [self updateWithSettings:settings];
     } else {
         CLLocationCoordinate2D location = CLLocationCoordinate2DMake(52.516221, 13.377829);
-        [self.mapView setCenterCoordinate:location animated:YES];
+        //[self.mapView setCenterCoordinate:location animated:YES];
+        
+        // Tried the recipe at https://github.com/choefele/CCHMapClusterController#centering-the-map-without-changing-the-zoom-level
+        MKMapPoint point = MKMapPointForCoordinate(location);
+        MKMapRect rect = [self.mapView visibleMapRect];
+        rect.origin.x = point.x - rect.size.width * 0.5;
+        rect.origin.y = point.y - rect.size.height * 0.5;
+        [self.mapView setVisibleMapRect:rect animated:YES];
     }
 }
 
