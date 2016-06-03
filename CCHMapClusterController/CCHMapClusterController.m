@@ -258,6 +258,7 @@
 
 - (void)selectAnnotation:(id<MKAnnotation>)annotation {
     if ([self isReadyToSelectAnnotation:annotation]) {
+        self.annotationToSelect = annotation;
         MKMapPoint point = MKMapPointForCoordinate(annotation.coordinate);
         MKMapRect rect = [self.mapView visibleMapRect];
         rect.origin.x = point.x - rect.size.width * 0.5;
