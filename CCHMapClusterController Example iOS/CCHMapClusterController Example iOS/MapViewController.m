@@ -84,7 +84,25 @@
     CLLocationDistance latitudinalMetersOfMapExtent = MKMetersBetweenMapPoints(topLeftMKMapPoint, bottomLeftMKMapPoint);
     CLLocationDistance longitudinalMetersOfMapExtent = MKMetersBetweenMapPoints(topLeftMKMapPoint, topRightMKMapPoint);
     
+    // This is buggy:
     [self.mapClusterControllerRed selectAnnotation:annotation andZoomToRegionWithLatitudinalMeters:latitudinalMetersOfMapExtent longitudinalMeters: longitudinalMetersOfMapExtent];
+    
+    
+    /*
+    // This works fine:
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, latitudinalMetersOfMapExtent, longitudinalMetersOfMapExtent);
+    [self.mapView setRegion:region animated:YES];
+    */
+    
+    /*
+     // This works fine:
+    MKMapPoint point = MKMapPointForCoordinate(annotation.coordinate);
+    MKMapRect rect = [self.mapView visibleMapRect];
+    rect.origin.x = point.x - rect.size.width * 0.5;
+    rect.origin.y = point.y - rect.size.height * 0.5;
+    [self.mapView setVisibleMapRect:rect animated:YES];
+     */
+
     self.lastViewedAnnotation = annotation;
 }
 
