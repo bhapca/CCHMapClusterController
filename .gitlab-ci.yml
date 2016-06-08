@@ -1,0 +1,23 @@
+# Before Script
+before_script:
+    - set -o pipefail
+    - export LANG=en_US.UTF-8
+    - env
+    - locale
+    - pod --version
+    - pod setup --silent
+    - pod repo update --silent
+    - xcpretty --version
+
+stages:
+    - build
+
+Build:
+  stage: build
+  script:
+    - echo Check if the library described by the podspec can be built and published on our private Specs repo
+    - pod lib lint --allow-warnings
+    - echo Build the example
+    - xcodebuild -workspace CCHMapClusterController.xcworkspace -scheme 'CCHMapClusterController Example iOS' -sdk iphonesimulator -configuration Debug test | xcpretty -c
+  tags:
+    - ios
