@@ -1,12 +1,12 @@
 Pod::Spec.new do |spec|
   spec.name     = 'CCHMapClusterController'
-  spec.version  = '1.7.0'
+  spec.version  = '1.7.0.1'
   spec.license  = 'MIT'
   spec.summary  = 'High-performance map clustering with MapKit for iOS and OS X. Integrate with 4 lines of code.'
-  spec.homepage = 'https://github.com/choefele/CCHMapClusterController'
+  spec.homepage = 'http://gitlab/ios/CCHMapClusterController'
   spec.authors  = { 'Claus Höfele' => 'claus@claushoefele.com' }
   spec.social_media_url = 'https://twitter.com/claushoefele'
-  spec.source   = { :git => 'https://github.com/choefele/CCHMapClusterController.git', :tag => spec.version.to_s }
+  spec.source   = { :git => 'git@gitlab.cj.psrk.com:ios/CCHMapClusterController.git', :tag => spec.version.to_s }
   spec.frameworks = 'MapKit', 'CoreLocation'
   spec.requires_arc = true
 
