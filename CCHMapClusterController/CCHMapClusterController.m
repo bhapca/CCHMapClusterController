@@ -259,11 +259,24 @@
 - (void)selectAnnotation:(id<MKAnnotation>)annotation {
     if ([self isReadyToSelectAnnotation:annotation]) {
         self.annotationToSelect = annotation;
-        [self centerMapOnAnnotation: annotation];
-        if (CCHMapClusterControllerCoordinateEqualToCoordinate(annotation.coordinate, self.mapView.centerCoordinate)) {
-            // Manually call update methods because region won't change
-            [self mapView:self.mapView regionWillChangeAnimated:YES];
-            [self mapView:self.mapView regionDidChangeAnimated:YES];
+        
+        id<MKAnnotation> annotationToCenterOn = nil;
+        if (self.maxZoomLevelForClustering != -1) { // i.e. clustering is enabled
+            annotationToCenterOn = CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, annotation);
+            if (annotationToCenterOn == nil) {
+                annotationToCenterOn = annotation;
+            }
+        } else {
+            annotationToCenterOn = annotation;
+        }
+        
+        if (annotationToCenterOn != nil) {
+            [self centerMapOnAnnotation: annotationToCenterOn];
+            if (CCHMapClusterControllerCoordinateEqualToCoordinate(annotationToCenterOn.coordinate, self.mapView.centerCoordinate)) {
+                // Manually call update methods because region won't change
+                [self mapView:self.mapView regionWillChangeAnimated:YES];
+                [self mapView:self.mapView regionDidChangeAnimated:YES];
+            }
         }
     }
 }
@@ -319,7 +332,7 @@
     [self updateAnnotationsWithCompletionHandler:^{
         if (self.annotationToSelect) {
             // Map has zoomed to selected annotation; search for cluster annotation that contains this annotation
-            CCHMapClusterAnnotation *mapClusterAnnotation = CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, self.annotationToSelect, mapView.visibleMapRect);
+            CCHMapClusterAnnotation *mapClusterAnnotation = CCHMapClusterControllerClusterAnnotationForAnnotationInMapRect(self.mapView, self.annotationToSelect, mapView.visibleMapRect);
             
             if (mapClusterAnnotation) {
                 self.annotationToSelect = nil;

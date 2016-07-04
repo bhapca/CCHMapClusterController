@@ -102,12 +102,31 @@ BOOL CCHMapClusterControllerCoordinateEqualToCoordinate(CLLocationCoordinate2D c
     return isCoordinateUpToDate;
 }
 
-CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect)
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotationInMapRect(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect)
 {
     CCHMapClusterAnnotation *annotationResult;
     
     NSSet *mapAnnotations = [mapView annotationsInMapRect:mapRect];
     for (id<MKAnnotation> mapAnnotation in mapAnnotations) {
+        if ([mapAnnotation isKindOfClass:CCHMapClusterAnnotation.class]) {
+            CCHMapClusterAnnotation *mapClusterAnnotation = (CCHMapClusterAnnotation *)mapAnnotation;
+            if (mapClusterAnnotation.annotations) {
+                if ([mapClusterAnnotation.annotations containsObject:annotation]) {
+                    annotationResult = mapClusterAnnotation;
+                    break;
+                }
+            }
+        }
+    }
+    
+    return annotationResult;
+}
+
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation)
+{
+    CCHMapClusterAnnotation *annotationResult;
+    
+    for (id<MKAnnotation> mapAnnotation in mapView.annotations) {
         if ([mapAnnotation isKindOfClass:CCHMapClusterAnnotation.class]) {
             CCHMapClusterAnnotation *mapClusterAnnotation = (CCHMapClusterAnnotation *)mapAnnotation;
             if (mapClusterAnnotation.annotations) {
