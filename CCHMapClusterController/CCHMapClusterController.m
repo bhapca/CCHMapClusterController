@@ -281,6 +281,10 @@
     }
 }
 
+- (CCHMapClusterAnnotation*)clusterAnnotationForAnnotation:(id<MKAnnotation>)annotation {
+    return CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, annotation);
+}
+
 - (BOOL)isReadyToSelectAnnotation:(id<MKAnnotation>)annotation {
     // Check for valid annotation
     BOOL existingAnnotation = [self.annotations containsObject:annotation];
