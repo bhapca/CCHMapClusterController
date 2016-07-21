@@ -261,12 +261,8 @@
         self.annotationToSelect = annotation;
         
         id<MKAnnotation> annotationToCenterOn = nil;
-        if (self.maxZoomLevelForClustering != -1) { // i.e. clustering is enabled
-            annotationToCenterOn = CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, annotation);
-            if (annotationToCenterOn == nil) {
-                annotationToCenterOn = annotation;
-            }
-        } else {
+        annotationToCenterOn = CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, annotation);
+        if (annotationToCenterOn == nil) {
             annotationToCenterOn = annotation;
         }
         
