@@ -29,6 +29,8 @@
 @protocol CCHMapClusterControllerDelegate;
 @protocol CCHMapClusterer;
 @protocol CCHMapAnimator;
+@class CCHMapClusterAnnotation;
+
 
 /**
  Controller to cluster annotations. Automatically updates clustering when user zooms or pans the map.
@@ -104,5 +106,11 @@
  @param annotation The annotation to look for. Uses `isEqual:` to check for a matching annotation previously added with `addAnnotations:withCompletionHandler:`.
  */
 - (void)selectAnnotation:(id<MKAnnotation>)annotation;
+
+/**
+ Returns the cluster annotation that contains the given annotation.
+@param annotation The annotation whose cluster to look for.
+ */
+- (CCHMapClusterAnnotation*)clusterAnnotationForAnnotation:(id<MKAnnotation>)annotation;
 
 @end

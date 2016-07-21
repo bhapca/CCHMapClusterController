@@ -102,12 +102,11 @@ BOOL CCHMapClusterControllerCoordinateEqualToCoordinate(CLLocationCoordinate2D c
     return isCoordinateUpToDate;
 }
 
-CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect)
+CCHMapClusterAnnotation *findClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation, id<NSFastEnumeration> candidateAnnotations)
 {
-    CCHMapClusterAnnotation *annotationResult;
+    CCHMapClusterAnnotation *annotationResult = nil;
     
-    NSSet *mapAnnotations = [mapView annotationsInMapRect:mapRect];
-    for (id<MKAnnotation> mapAnnotation in mapAnnotations) {
+    for (id<MKAnnotation> mapAnnotation in candidateAnnotations) {
         if ([mapAnnotation isKindOfClass:CCHMapClusterAnnotation.class]) {
             CCHMapClusterAnnotation *mapClusterAnnotation = (CCHMapClusterAnnotation *)mapAnnotation;
             if (mapClusterAnnotation.annotations) {
@@ -120,6 +119,16 @@ CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(M
     }
     
     return annotationResult;
+}
+
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect)
+{
+    return findClusterAnnotationForAnnotation(mapView, annotation, [mapView annotationsInMapRect:mapRect]);
+}
+
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(MKMapView *mapView, id<MKAnnotation> annotation)
+{
+    return findClusterAnnotationForAnnotation(mapView, annotation, mapView.annotations);
 }
 
 void CCHMapClusterControllerEnumerateCells(MKMapRect mapRect, double cellSize, void (^block)(MKMapRect cellMapRect))

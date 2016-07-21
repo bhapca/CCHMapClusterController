@@ -259,13 +259,26 @@
 - (void)selectAnnotation:(id<MKAnnotation>)annotation {
     if ([self isReadyToSelectAnnotation:annotation]) {
         self.annotationToSelect = annotation;
-        [self centerMapOnAnnotation: annotation];
-        if (CCHMapClusterControllerCoordinateEqualToCoordinate(annotation.coordinate, self.mapView.centerCoordinate)) {
-            // Manually call update methods because region won't change
-            [self mapView:self.mapView regionWillChangeAnimated:YES];
-            [self mapView:self.mapView regionDidChangeAnimated:YES];
+        
+        id<MKAnnotation> annotationToCenterOn = nil;
+        annotationToCenterOn = CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(self.mapView, annotation);
+        if (annotationToCenterOn == nil) {
+            annotationToCenterOn = annotation;
+        }
+        
+        if (annotationToCenterOn != nil) {
+            [self centerMapOnAnnotation: annotationToCenterOn];
+            if (CCHMapClusterControllerCoordinateEqualToCoordinate(annotationToCenterOn.coordinate, self.mapView.centerCoordinate)) {
+                // Manually call update methods because region won't change
+                [self mapView:self.mapView regionWillChangeAnimated:YES];
+                [self mapView:self.mapView regionDidChangeAnimated:YES];
+            }
         }
     }
+}
+
+- (CCHMapClusterAnnotation*)clusterAnnotationForAnnotation:(id<MKAnnotation>)annotation {
+    return CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(self.mapView, annotation);
 }
 
 - (BOOL)isReadyToSelectAnnotation:(id<MKAnnotation>)annotation {
