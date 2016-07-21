@@ -38,8 +38,8 @@ double CCHMapClusterControllerMapLengthForLength(MKMapView *mapView, NSView *vie
 #endif
 double CCHMapClusterControllerAlignMapLengthToWorldWidth(double mapLength);
 BOOL CCHMapClusterControllerCoordinateEqualToCoordinate(CLLocationCoordinate2D coordinate0, CLLocationCoordinate2D coordinate1);
-CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotationInMapRect(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect);
-CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation);
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect);
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(MKMapView *mapView, id<MKAnnotation> annotation);
 void CCHMapClusterControllerEnumerateCells(MKMapRect mapRect, double cellSize, void (^block)(MKMapRect cellMapRect));
 MKMapRect CCHMapClusterControllerMapRectForCoordinateRegion(MKCoordinateRegion coordinateRegion);
 NSSet *CCHMapClusterControllerClusterAnnotationsForAnnotations(NSArray *annotations, CCHMapClusterController *mapClusterController);

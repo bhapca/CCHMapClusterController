@@ -261,7 +261,7 @@
         self.annotationToSelect = annotation;
         
         id<MKAnnotation> annotationToCenterOn = nil;
-        annotationToCenterOn = CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, annotation);
+        annotationToCenterOn = CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(self.mapView, annotation);
         if (annotationToCenterOn == nil) {
             annotationToCenterOn = annotation;
         }
@@ -278,7 +278,7 @@
 }
 
 - (CCHMapClusterAnnotation*)clusterAnnotationForAnnotation:(id<MKAnnotation>)annotation {
-    return CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, annotation);
+    return CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(self.mapView, annotation);
 }
 
 - (BOOL)isReadyToSelectAnnotation:(id<MKAnnotation>)annotation {
@@ -332,7 +332,7 @@
     [self updateAnnotationsWithCompletionHandler:^{
         if (self.annotationToSelect) {
             // Map has zoomed to selected annotation; search for cluster annotation that contains this annotation
-            CCHMapClusterAnnotation *mapClusterAnnotation = CCHMapClusterControllerClusterAnnotationForAnnotationInMapRect(self.mapView, self.annotationToSelect, mapView.visibleMapRect);
+            CCHMapClusterAnnotation *mapClusterAnnotation = CCHMapClusterControllerClusterAnnotationForAnnotation(self.mapView, self.annotationToSelect, mapView.visibleMapRect);
             
             if (mapClusterAnnotation) {
                 self.annotationToSelect = nil;

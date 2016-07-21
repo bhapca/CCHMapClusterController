@@ -121,12 +121,12 @@ CCHMapClusterAnnotation *findClusterAnnotationForAnnotation(MKMapView *mapView, 
     return annotationResult;
 }
 
-CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotationInMapRect(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect)
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation, MKMapRect mapRect)
 {
     return findClusterAnnotationForAnnotation(mapView, annotation, [mapView annotationsInMapRect:mapRect]);
 }
 
-CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotation(MKMapView *mapView, id<MKAnnotation> annotation)
+CCHMapClusterAnnotation *CCHMapClusterControllerClusterAnnotationForAnnotationInMapView(MKMapView *mapView, id<MKAnnotation> annotation)
 {
     return findClusterAnnotationForAnnotation(mapView, annotation, mapView.annotations);
 }
